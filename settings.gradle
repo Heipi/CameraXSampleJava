@@ -1,0 +1,3 @@
+rootProject.name='Hilt'
+include ':app'
+include ':xcamera'
