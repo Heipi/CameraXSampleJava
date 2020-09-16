@@ -7,4 +7,9 @@ public class AnalyticsServiceImpl implements AnalyticsService{
     AnalyticsServiceImpl(){
 
     }
+
+    @Override
+    public void analyticsMethods() {
+
+    }
 }
