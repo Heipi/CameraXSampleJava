@@ -1,6 +1,7 @@
 package com.ai.xcamera.capture;
 
 import android.util.Size;
+import android.view.Surface;
 
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
@@ -21,13 +22,16 @@ import java.util.concurrent.TimeUnit;
 /**
  * 图片拍摄拍摄
  */
-public class Capture {
+public class CameraCapture {
 
-    public ImageCapture buildImage() {
+
+
+    public static  ImageCapture buildCapture() {
         ImageCapture.Builder builder =
                 new ImageCapture.Builder();
         //设置预期目标的高宽比
         builder.setTargetAspectRatio(AspectRatio.RATIO_4_3);
+        builder.setTargetRotation(Surface.ROTATION_0);
         /* builder.setTargetResolution(new Size(1920,1089));*/
         //设置闪光灯模式
         builder.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
