@@ -14,7 +14,7 @@
 
     <Button
         android:id="@+id/take"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="50dp"

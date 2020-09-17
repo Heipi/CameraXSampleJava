@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
@@ -12,10 +13,12 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ai.xcamera.capture.CameraAnalysis;
 import com.ai.xcamera.capture.CameraCapture;
@@ -33,6 +36,7 @@ public class CameraActivity extends AppCompatActivity {
     ImageAnalysis analysis;
     ImageCapture capture;
     String imgPath;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +44,7 @@ public class CameraActivity extends AppCompatActivity {
         previewView  = findViewById(R.id.preview_view);
         Executor executor = Executors.newSingleThreadExecutor();
 
-        Log.d("SAVE SUCCESS =","===="+imgPath);
-//        Log.d("SAVE SUCCESS =","===="+file.exists());
+//        CameraX.getOrCreateInstance(this);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
         analysis = CameraAnalysis.buildAnalysis();
@@ -74,11 +77,12 @@ public class CameraActivity extends AppCompatActivity {
 
     public void takePicture(View view) {
         imgPath = Environment.getExternalStorageDirectory()+"/APicture";
+        Log.d("SAVE SUCCESS =","===="+imgPath);
         File file = new File(imgPath);
         if (!file.exists()){
             file.mkdirs();
         }
-        File imgFile = new File(imgPath,"123.png");
+        File imgFile = new File(imgPath,"temp.png");
         ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(imgFile).build();
         capture.takePicture(outputFileOptions,
@@ -87,13 +91,12 @@ public class CameraActivity extends AppCompatActivity {
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                         Log.d("SAVE SUCCESS =",Thread.currentThread().getName());
                      Log.d("SAVE SUCCESS",outputFileResults.toString());
+                        Toast.makeText(CameraActivity.this,"save success",Toast.LENGTH_LONG).show();
                     }
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
                         Log.d("SAVE error",exception.toString());
                     }
         });
-
-
     }
 }
