@@ -43,7 +43,6 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         previewView  = findViewById(R.id.preview_view);
         Executor executor = Executors.newSingleThreadExecutor();
-
 //        CameraX.getOrCreateInstance(this);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
