@@ -18,7 +18,6 @@ class StatisticsViewModel(private val tasksRepository: TasksRepository) :ViewMod
       }else{
          null
       }
-
    }
 
    val activeTasksPercent = stats.map {
