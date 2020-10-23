@@ -23,6 +23,7 @@ class TasksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
+        //设置状态栏
         window.statusBarColor = Color.CYAN
         setupNavigationDrawer()
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -31,7 +32,9 @@ class TasksActivity : AppCompatActivity() {
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
          navController = navHostFragment.navController
          appBarConfiguration =  AppBarConfiguration(navController.graph,drawerLayout)
-         setupActionBarWithNavController(navController,appBarConfiguration)
+        //actionbar setupActionBarWithNavController 需要重写 onSupportNavigateUp
+        setupActionBarWithNavController(navController,appBarConfiguration)
+        //侧边栏
         findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navController)
 
     }
